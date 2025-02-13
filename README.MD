@@ -172,6 +172,6 @@ Son olarak tarayıcıdan şu adresleri deneyelim:
 
 
 ## 🏁 Sonuç
-Bu adımları tamamladıktan sonra **Kubernetes üzerinde çalışan  uygulamamız** oluuyor! 🚀
+Bu adımları tamamladıktan sonra **Kubernetes üzerinde çalışan  uygulamamız oluyor!** 🚀
 
 
