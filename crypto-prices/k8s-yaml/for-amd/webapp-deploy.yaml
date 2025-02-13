@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: crypto-webapp
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: crypto-webapp
+  template:
+    metadata:
+      labels:
+        app: crypto-webapp
+    spec:
+      containers:
+      - name: webapp
+        image: hsnmrhn/webapp
+        env:
+        - name: FLASK_RUN_HOST
+          value: "0.0.0.0"
+        ports:
+        - containerPort: 8080
+        volumeMounts:
+        - name: crypto-data
+          mountPath: /data
+        resources:
+          requests:
+            memory: "256Mi"
+            cpu: "200m"
+          limits:
+            memory: "512Mi"
+            cpu: "500m"
+      volumes:
+      - name: crypto-data
+        persistentVolumeClaim:
+          claimName: crypto-data-pvc

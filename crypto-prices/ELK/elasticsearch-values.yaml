@@ -1,0 +1,19 @@
+
+elasticsearch:
+  antiAffinity: "soft"
+  resources:
+    requests:
+      cpu: "100m"
+      memory: "512Mi"
+    limits:
+      memory: "512Mi"
+  esConfig:
+    elasticsearch.yml: |
+      xpack.security.enabled: false  # Test ortamı için güvenlik devre dışı
+volumeClaimTemplate:
+  accessModes: [ "ReadWriteOnce" ]
+  storageClassName: "standard"  # Ortamınıza göre ayarlayın
+  resources:
+    requests:
+      storage: 5Gi
+

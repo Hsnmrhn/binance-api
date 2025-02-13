@@ -1,0 +1,20 @@
+logstashPipeline:
+  logstash.conf: |
+    input {
+      tcp {
+        port => 5000
+        codec => json
+      }
+    }
+    output {
+      elasticsearch {
+        hosts => ["http://elasticsearch-master:9200"]
+        index => "app-logs-%{+YYYY.MM.dd}"
+      }
+    }
+resources:
+  requests:
+    cpu: "100m"
+    memory: "512Mi"
+  limits:
+    memory: "512Mi"

@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: price-fetcher
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: price-fetcher
+  template:
+    metadata:
+      labels:
+        app: price-fetcher
+    spec:
+      dnsConfig:
+        nameservers:
+          - "8.8.8.8"
+          - "8.8.4.4"
+        searches:
+          - default.svc.cluster.local
+          - svc.cluster.local
+          - cluster.local
+        options:
+          - name: ndots
+            value: "5"
+      dnsPolicy: "None"  # Custom DNS configuration
+      containers:
+      - name: price-fetcher
+        image: hsnmrhn/fetch
+        volumeMounts:
+        - name: crypto-data
+          mountPath: /data
+        resources:
+          requests:
+            memory: "256Mi"
+            cpu: "200m"
+          limits:
+            memory: "512Mi"
+            cpu: "500m"
+      volumes:
+      - name: crypto-data
+        persistentVolumeClaim:
+          claimName: crypto-data-pvc
