@@ -79,7 +79,7 @@ sudo apt-mark hold kubelet kubeadm kubectl
 ### **Master Node Kurulumu**
 1. Master node'u başlatıyoruz:
 ```sh
-sudo kubeadm init --pod-network-cidr=192.168.0.0/16 --cri-socket unix:///run/containerd/containerd.sock
+sudo kubeadm init --pod-network-cidr=192.168.0.0/16 --cri-socket # calico unix:///run/containerd/containerd.sock
 ```
 2. Kubeconfig dosyasını ayarlıyoruz:
 ```sh
@@ -89,7 +89,7 @@ sudo chown $(id -u):$(id -g) $HOME/.kube/config
 ```
 
 ### 4️⃣ Control-Plane Üzerinde Pod Çalıştırmayı Etkinleştirme 
-## ( Master Node Kurulumu Kısmını Atlayıp ***kubeadm token create --print-join-command*** ile elde ettiğmiz komut ile worker node u da sudo ile bağlıyoruz)
+## ( Master Node Kurulumu Kısmını Atlayıp ***kubeadm token create --print-join-command*** dan elde ettiğmiz komutu worker node da sudo ile girerek master bağlıyor ve 1 master 1 worker nodedan oluşan cluster'ı kurmuş oluyoruz)
 
 Varsayılan olarak, control-plane node’unda pod çalıştırılmasına izin verilmez. Bu kısıtlamayı kaldırıyoruz:
 
@@ -154,11 +154,11 @@ kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/main
 ```
 
 ### 4️⃣ Uygulamayı macOS Tarayıcısından Erişilebilir Hale Getirme
-Multipass instance’ınızın IP adresini buluyoruz:
+Multipass instance’ımızın IP adresini buluyoruz:
 ```sh
 multipass list
 ```
-Daha sonra macOS üzerinde `/etc/hosts` dosyanıza aşağıdaki satırı ekleyelim:
+Daha sonra macOS üzerinde `/etc/hosts` dosyasına aşağıdaki satırı ekleyelim:
 ```sh
 echo "192.168.64.2 checkcurrency.case.local" | sudo tee -a /etc/hosts
 ```
