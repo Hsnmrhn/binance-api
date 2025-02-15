@@ -79,7 +79,7 @@ sudo apt-mark hold kubelet kubeadm kubectl
 ### **Master Node Kurulumu**
 1. Master node'u başlatıyoruz:
 ```sh
-sudo kubeadm init --pod-network-cidr=192.168.0.0/16 --cri-socket # calico unix:///run/containerd/containerd.sock
+sudo kubeadm init --pod-network-cidr=192.168.0.0/16 --cri-socket  unix:///run/containerd/containerd.sock
 ```
 2. Kubeconfig dosyasını ayarlıyoruz:
 ```sh
